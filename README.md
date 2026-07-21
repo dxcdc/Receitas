@@ -20,7 +20,7 @@ Clique abaixo para acessar o conteúdo de cada pasta diretamente no repositório
 
 | Diretório | Descrição | Conteúdo sugerido |
 | :--- | :--- | :--- |
-| [📂 **prompts/**](./prompts) | Prompts de sistema e engenharia de prompt | Prompts de sistema para codificação, meta-prompts de documentação, etc. |
+| [📂 **prompts/**](./prompts) | Prompts de sistema e engenharia de prompt | Prompts de sistema para codificação, geradores de docs DevOps, etc. |
 | [📂 **api/**](./api) | Boilerplates de integração de APIs de LLM | Scripts prontos para Gemini, OpenAI, Anthropic, etc. |
 | [📂 **infra/**](./infra) | Arquitetura, Backups, DNS e Segurança | Guia Rclone/GDrive, Cofres OpenBao/Vaultwarden, DNS e E-mail. |
 | [📂 **mcp/**](./mcp) | Servidores MCP (Model Context Protocol) | Modelos básicos para criar e estender servidores MCP. |
@@ -34,6 +34,7 @@ Clique abaixo para acessar o conteúdo de cada pasta diretamente no repositório
 ### 💬 Prompts & Governança
 * 🔌 **[System Prompt de Codificação](./prompts/system_prompts.md)**: Prompt de sistema robusto para configurar LLMs para atuar como desenvolvedores seniores.
 * ✍️ **[Meta-Prompt de Redação Técnica e Documentação](./prompts/meta_prompt_documentacao.md)**: Guia universal para alimentar a IA como Arquiteto de Informação, aplicando o modelo híbrido de escrita e alimentação incremental.
+* 🤖 **[Prompt Mestre: Gerador de Documentação DevOps & Infra](./prompts/prompt_gerador_documentacao_devops.md)**: Prompt de instrução oficial para IAs gerarem automaticamente toda a estrutura de 8 arquivos de documentação técnica, backup, postmortem, troubleshooting e alertas Mattermost em qualquer novo repositório.
 
 ### 🐍 Integrações de API
 * 🚀 **[Gemini Quickstart (Python)](./api/gemini_quickstart.py)**: Template em Python para iniciar rapidamente chamadas com a API do Gemini, suportando respostas em streaming e Structured Outputs (JSON).
@@ -48,7 +49,7 @@ Clique abaixo para acessar o conteúdo de cada pasta diretamente no repositório
 ## 🔒 Auditoria de Segurança
 
 > [!IMPORTANT]
-> Este repositório é auditado para garantir que **nenhuma credencial real, senha, chave privada ou webhook sensível** seja exposto. Todos os arquivos de exemplo usam variáveis de ambiente (`os.getenv`) ou placeholders genéricos (ex: `sua_chave_api_aqui`).
+> Este repositório é auditado para garantir que **nenhuma credencial real, senha, chave privada ou webhook sensível** seja exposto. Todos os arquivos de exemplo usam variáveis de ambiente (`os.getenv`) ou placeholders genéricos (ex: `<MATTERMOST_WEBHOOK_URL>`, `sua_chave_api_aqui`).
 
 ---
 
