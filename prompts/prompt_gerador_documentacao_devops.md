@@ -1,6 +1,6 @@
-# 🤖 Prompt Gerador de Documentação Padronizada de DevOps, Rclone, Mattermost & Governança
+# 🤖 Prompt Gerador de Documentação Padronizada de DevOps, Rclone, Mattermost, GitHub Issues & Governança
 
-Este arquivo contém o **Prompt Mestre** completo para instruir um modelo de Inteligência Artificial (Gemini Pro, Claude, ChatGPT, etc.) a analisar a base de código de qualquer projeto e gerar automaticamente toda a estrutura de documentação técnica padronizada (arquitetura, infraestrutura, backups Rclone + Google Drive, alertas no Mattermost, troubleshooting e governança).
+Este arquivo contém o **Prompt Mestre** completo para instruir um modelo de Inteligência Artificial (Gemini Pro, Claude, ChatGPT, etc.) a analisar a base de código de qualquer projeto e gerar automaticamente toda a estrutura de documentação técnica padronizada (arquitetura, infraestrutura, backups Rclone + Google Drive, alertas no Mattermost, automação de GitHub Issues via GitHub Actions, troubleshooting e governança).
 
 ---
 
@@ -18,6 +18,7 @@ Sua missão é analisar o projeto atualmente aberto e estruturar, diretamente no
 * Estratégia de Backup 3-2-1 (Dump local + Criptografia GPG/Rclone Crypt + Upload Offsite Rclone Google Drive);
 * Comunicação Operacional & Webhooks do Mattermost;
 * Suporte, Troubleshooting e Postmortem Blameless;
+* Automação de GitHub Issues via GitHub Actions (`.github/workflows/automatizar_issues.yml`);
 * Contexto Permanente para Inteligência Artificial (Prompt IA).
 
 ---
@@ -125,7 +126,23 @@ Contexto e instruções permanentes para assistentes de Inteligência Artificial
 
 ---
 
-# 4. README PRINCIPAL (`README.md`)
+# 4. AUTOMAÇÃO DE GITHUB ISSUES VIA GITHUB ACTIONS
+
+Analise a documentação e as tarefas pendentes do projeto e crie a automação de cadastro de tarefas no GitHub:
+
+1. Crie o arquivo de fluxo `.github/workflows/automatizar_issues.yml` configurado para disparar no `push` da branch `main` e no `workflow_dispatch`.
+2. Configure as permissões do workflow para `issues: write` e `contents: read` utilizando a variável `GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}`.
+3. No script em bash do workflow, utilize a ferramenta GitHub CLI (`gh issue create`) para criar automaticamente no GitHub as Issues principais deste repositório, contendo:
+   - Títulos claros com identificadores (ex: `[FEAT]`, `[CONFIG]`, `[ARCH]`, `[BUG]`, `[DOCS]`).
+   - Rótulos (labels) adequados ao tipo de tarefa (ex: `enhancement`, `bug`, `documentation`).
+   - Critérios de Aceite organizados em caixas de verificação (checklists `- [ ]`).
+   - Links apontando para os documentos de referência em `docs/`.
+4. Adicione uma verificação prévia usando `gh issue list --search` para evitar que a mesma Issue seja criada repetidamente em novos commits.
+5. Adicione as alterações ao Git, faça o commit e o `git push` para a branch `main` para que o GitHub inicie a criação automática das Issues na aba "Issues" do repositório.
+
+---
+
+# 5. README PRINCIPAL (`README.md`)
 
 Na raiz do repositório, crie ou atualize o `README.md`:
 * Badges Shields.io (Status, Stack, Licença, etc.);
@@ -137,11 +154,11 @@ Na raiz do repositório, crie ou atualize o `README.md`:
 
 ---
 
-# 5. FORMATO DA RESPOSTA FINAL
+# 6. FORMATO DA RESPOSTA FINAL
 
 Após gravar todos os arquivos diretamente no disco, apresente um resumo contendo:
-1. Lista dos arquivos gerados/atualizados em `docs/` e `README.md`.
-2. Tecnologias identificadas no projeto (incluindo Rclone e Mattermost).
+1. Lista dos arquivos gerados/atualizados em `docs/`, `.github/workflows/` e `README.md`.
+2. Tecnologias identificadas no projeto (incluindo Rclone, Mattermost e GitHub Actions).
 3. Marcadores `<TODO: DEFINIR>` pendentes (se houver).
 4. Confirmação do relatório de auditoria de segurança (garantindo ausência de segredos reais).
 ```
